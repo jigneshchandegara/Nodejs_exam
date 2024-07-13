@@ -7,11 +7,12 @@ const router = express.Router();
 
 
 router.post('/recipecreate',
-    isLogin,
-    isRestrict(["admin"]),
+    // isLogin,
+    // isRestrict(["admin"]),
     recipecontrollers.createrecipe);
 router.get('/getrecipelist', recipecontrollers.recipeget);
+router.get("/getmyrecipe/:id", recipecontrollers.recipegetmy);
 router.delete("/deleterecipe/:id", recipecontrollers.recipedelete);
-router.put("/updatarecipr/:id", recipecontrollers.recipeupdata)
+router.put("/updatarecipr/:id", recipecontrollers.recipeupdata);
 
 module.exports = router;

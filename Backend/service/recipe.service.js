@@ -15,4 +15,8 @@ let deleterecipe = (id) => {
 let updaterecipe = (id, body) => {
     return RecipeSchema.findByIdAndUpdate(id, body)
 }
-module.exports = { postrecipe, getrecipe, deleterecipe, updaterecipe }
+
+let getmyrecipe = (id) =>{
+    return RecipeSchema.find({createdBy:id}).populate(["createdBy"])
+}
+module.exports = { postrecipe, getrecipe, deleterecipe, updaterecipe ,getmyrecipe }

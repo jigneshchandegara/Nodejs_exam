@@ -70,4 +70,21 @@ let recipeupdata = async (req, res) => {
     }
 
 }
-module.exports = { createrecipe, recipeget, recipedelete, recipeupdata };
+
+let recipegetmy = async (req, res) => {
+    try {
+        let { id } = req.params
+        let result = await recipeservice.getmyrecipe(id);
+        res.status(200).json({
+            message: "get my recipe successfully",
+            data: result
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message: "get my recipe failed",
+            error: error.message
+        })
+    }
+}
+module.exports = { createrecipe, recipeget, recipedelete, recipeupdata, recipegetmy };

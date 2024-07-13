@@ -1,30 +1,29 @@
 import axios from 'axios';
 import React, { useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-
-const Login = () => {
+const Register = () => {
 
     let username = useRef();
     let password = useRef();
 
-    
-    let logindata = async (e) => {
+    let registerdata = async (e) => {
         e.preventDefault();
-        let data = {
+        let userdata = {
             username: username.current.value,
             password: password.current.value
+
         }
         try {
-
-            let result = await axios.post("http://localhost:8080/v1/user/login", data)
+            let result = await axios.post("http://localhost:8080/v1/user/login", userdata)
             console.log(result);
             if (result) {
+                localStorage.setItem("user", JSON.stringify(result.data.data))
                 window.location.href = "/recipeForm"
                 Swal.fire({
                     title: "Good job!",
-                    text: "add user success",
+                    text: "user login success",
                     icon: "success"
                 });
             }
@@ -35,7 +34,9 @@ const Login = () => {
                 text: `${error.response.data.message}`
             });
         }
+
     }
+
     return (
         <>
             <section class="bg-gray-50 dark:bg-gray-900">
@@ -44,18 +45,18 @@ const Login = () => {
                     <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <h1 class="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                                Login user
+                                Login
                             </h1>
                             <form class="space-y-4 md:space-y-6" action="#">
                                 <div>
-                                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">username</label>
+                                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">username</label>
                                     <input type="text" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="user name" required="" ref={username} />
                                 </div>
                                 <div>
-                                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                                     <input type="text" name="password" id="password" placeholder="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" ref={password} />
                                 </div>
-                                <button type="submit" class="w-full bg-blue-700 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" onClick={logindata}>Login an account</button>
+                                <button type="submit" class="w-full bg-blue-700 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" onClick={registerdata}>Login an account</button>
                                 <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                                     Already have an account?
                                     <Link to={"/"} class="font-medium text-primary-600 hover:underline dark:text-primary-500">Register here</Link>
@@ -71,4 +72,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Register

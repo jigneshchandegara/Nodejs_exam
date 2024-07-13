@@ -7,7 +7,6 @@ const RecipeForm = () => {
     let title = useRef();
     let description = useRef();
     let instructions = useRef();
-    let createdBy = useRef();
 
     let getid =  JSON.parse(localStorage.getItem("user"));
     let Addrecipe = async (e) => {
@@ -19,8 +18,8 @@ const RecipeForm = () => {
         }
         try {
 
-            let result = await axios.post("http://localhost:8080/v1/recipe/recipecreate", recipedata)
-            console.log(result);
+            // let result = await axios.post("http://localhost:8080/v1/recipe/recipecreate", recipedata)
+            console.log(recipedata);
             if (result) {
                 Swal.fire({
                     title: "Good job!",
@@ -57,10 +56,7 @@ const RecipeForm = () => {
                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">instructions</label>
                                 <input type="text" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="instructions" required ref={instructions} />
                             </div>
-                            <div>
-                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">createdBy</label>
-                                <input type="text" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="createdBy" required ref={createdBy} />
-                            </div>
+                        
                             <button class="py-3 px-5 bg-blue-600 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                                 onClick={Addrecipe}
                             >Send message</button>
