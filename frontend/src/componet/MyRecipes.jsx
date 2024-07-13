@@ -2,14 +2,15 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
 const myRecipes = () => {
+    let userget = JSON.parse(localStorage.getItem("user"))
     // let usertoken = Cookies.get("token");
     const [getmyrecipe, setgetmyrecipe] = useState([])
 
 
     const myrecipe = async () => {
         try {
-            // let result = await axios.get(`http://localhost:8080/v1/recipe/getmyrecipe/${usertoken._id}`)
-            let result = await axios.get(`http://localhost:8080/v1/recipe/getmyrecipe/66925220b387cecfd9fec3aa`)
+            let result = await axios.get(`http://localhost:8080/v1/recipe/getmyrecipe/${userget._id}`)
+            // let result = await axios.get(`http://localhost:8080/v1/recipe/getmyrecipe/66925220b387cecfd9fec3aa`)
             console.log(result);
             setgetmyrecipe(result.data)
         } catch (error) {

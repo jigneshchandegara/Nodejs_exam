@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post('/recipecreate',
     // isLogin,
-    // isRestrict(["admin"]),
+    // isRestrict(["admin,user"]),
     recipecontrollers.createrecipe);
 router.get('/getrecipelist', recipecontrollers.recipeget);
 router.get("/getmyrecipe/:id", recipecontrollers.recipegetmy);

@@ -10,6 +10,7 @@ const RecipeForm = () => {
 
     let getid =  JSON.parse(localStorage.getItem("user"));
     let Addrecipe = async (e) => {
+        e.preventDefault();
         let recipedata = {
             title: title.current.value,
             description: description.current.value,
@@ -18,8 +19,8 @@ const RecipeForm = () => {
         }
         try {
 
-            // let result = await axios.post("http://localhost:8080/v1/recipe/recipecreate", recipedata)
-            console.log(recipedata);
+            let result = await axios.post("http://localhost:8080/v1/recipe/recipecreate", recipedata)
+            console.log(result);
             if (result) {
                 Swal.fire({
                     title: "Good job!",
@@ -31,7 +32,7 @@ const RecipeForm = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: `${error.response.data.message}`
+                text: `${error}`
             });
         }
     }
